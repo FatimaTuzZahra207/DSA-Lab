@@ -7,11 +7,14 @@
 namespace utilities {
     int add(int a, int b);
 
-    // Task 3: Find all indices of key in an array
+    //Find all indices of key in an array
     std::vector<int> find_all_indices(const int arr[], int size, int key);
 
-    // Task 4: Find first occurrence of a substring (pattern) in text
+   //Find first occurrence of a substring (pattern) in text
     int find_substring(const std::string& text, const std::string& pattern);
+
+    // Task 5: Generate Pascal's Triangle up to n rows
+    std::vector<std::vector<int>> generate_pascals_triangle(int n);
 }
 
 #endif
