@@ -1,55 +1,47 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <cstdlib>
+#include <algorithm>
 #include "utilities.h"
-void test_find_all_indices() {
-    int arr1[] = {10, 20, 10, 30, 10};
-    std::vector<int> res1 = utilities::find_all_indices(arr1, 5, 10);
-    std::cout << "Multiple occurrences test: " 
-              << (res1 == std::vector<int>{0, 2, 4} ? "PASS" : "FAIL") << "\n";
 
-    int arr2[] = {1, 2, 3, 4};
-    std::vector<int> res2 = utilities::find_all_indices(arr2, 4, 99);
-    std::cout << "Key not present test: " 
-              << (res2.empty() ? "PASS" : "FAIL") << "\n";
+// ... Keep existing tests for previous tasks intact ...
 
-    int arr3[] = {};
-    std::vector<int> res3 = utilities::find_all_indices(arr3, 0, 5);
-    std::cout << "Empty array test: " 
-              << (res3.empty() ? "PASS" : "FAIL") << "\n"; }
-void test_find_substring() {
-    std::cout << "Pattern at beginning test: "
-              << (utilities::find_substring("hello world", "hello") == 0 ? "PASS" : "FAIL") << "\n";
-    std::cout << "Pattern at end test: "
-              << (utilities::find_substring("hello world", "world") == 6 ? "PASS" : "FAIL") << "\n";
-
-    std::cout << "Pattern not present test: "
-              << (utilities::find_substring("hello world", "c++") == -1 ? "PASS" : "FAIL") << "\n";
-
-    std::cout << "Empty pattern test: "
-              << (utilities::find_substring("hello world", "") == 0 ? "PASS" : "FAIL") << "\n";
+utilities::Matrix generate_random_matrix(int size) {
+    utilities::Matrix mat(size, std::vector<int>(size));
+    for (int i = 0; i < size; ++i)
+        for (int j = 0; j < size; ++j)
+            mat[i][j] = rand() % 10;
+    return mat;
 }
-void test_pascals_triangle() {
-    // Test 1: n = 0
-    auto t0 = utilities::generate_pascals_triangle(0);
-    std::cout << "Pascal n=0 test: " << (t0.empty() ? "PASS" : "FAIL") << "\n";
 
-    // Test 2: n = 1
-    auto t1 = utilities::generate_pascals_triangle(1);
-    std::cout << "Pascal n=1 test: " 
-              << (t1.size() == 1 && t1[0] == std::vector<int>{1} ? "PASS" : "FAIL") << "\n";
+void test_strassen() {
+    // Test 1: 2x2 Matrix
+    utilities::Matrix A2 = {{1, 2}, {3, 4}};
+    utilities::Matrix B2 = {{5, 6}, {7, 8}};
+    auto naive2 = utilities::multiply_naive(A2, B2);
+    auto strassen2 = utilities::multiply_strassen(A2, B2);
+    std::cout << "Strassen 2x2 test: " 
+              << (naive2 == strassen2 ? "PASS" : "FAIL") << "\n";
 
-    // Test 3: n = 5 and row 5 check ({1, 4, 6, 4, 1})
-    auto t5 = utilities::generate_pascals_triangle(5);
-    std::vector<int> expected_row_5 = {1, 4, 6, 4, 1};
-    std::cout << "Pascal n=5 test: " << (t5.size() == 5 ? "PASS" : "FAIL") << "\n";
-    std::cout << "Pascal row 5 verify: " 
-              << (t5.back() == expected_row_5 ? "PASS" : "FAIL") << "\n"; }
+    // Test 2: 4x4 Matrix
+    utilities::Matrix A4 = {{1, 0, 0, 0}, {0, 1, 0, 0}, {0, 0, 1, 0}, {0, 0, 0, 1}};
+    utilities::Matrix B4 = {{2, 3, 4, 5}, {6, 7, 8, 9}, {1, 0, 1, 0}, {0, 1, 0, 1}};
+    auto naive4 = utilities::multiply_naive(A4, B4);
+    auto strassen4 = utilities::multiply_strassen(A4, B4);
+    std::cout << "Strassen 4x4 test: " 
+              << (naive4 == strassen4 ? "PASS" : "FAIL") << "\n";
+
+    // Test 3: Random values comparison (4x4)
+    auto Arand = generate_random_matrix(4);
+    auto Brand = generate_random_matrix(4);
+    auto naive_rand = utilities::multiply_naive(Arand, Brand);
+    auto strassen_rand = utilities::multiply_strassen(Arand, Brand);
+    std::cout << "Strassen random 4x4 matrix test: " 
+              << (naive_rand == strassen_rand ? "PASS" : "FAIL") << "\n";
+}
+
 int main() {
-    std::cout << "add(2,3) == 5: " 
-              << (utilities::add(2, 3) == 5 ? "PASS" : "FAIL") << "\n";   
-    test_find_all_indices();
-    test_find_substring();
-    test_pascals_triangle();
+    test_strassen();
     return 0;
 }

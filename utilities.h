@@ -8,17 +8,22 @@
 namespace utilities {
     int add(int a, int b);
 
-    //  Find all indices of key in an array
+    // Task 3: Find all indices of key in an array
     std::vector<int> find_all_indices(const int arr[], int size, int key);
 
-    // Find first occurrence of a substring (pattern) in text
+    // Task 4: Find first occurrence of a substring (pattern) in text
     int find_substring(const std::string& text, const std::string& pattern);
 
-    // Generate Pascal's Triangle up to n rows
+    // Task 5: Generate Pascal's Triangle up to n rows
     std::vector<std::vector<int>> generate_pascals_triangle(int n);
 
-    // Find all mode(s) in an array
+    // Task 6: Find mode(s) in an array
     std::vector<int> find_modes(const int arr[], int size);
+
+    // Task 7: Matrix Multiplication Algorithms
+    using Matrix = std::vector<std::vector<int>>;
+    Matrix multiply_naive(const Matrix& A, const Matrix& B);
+    Matrix multiply_strassen(const Matrix& A, const Matrix& B);
 }
 
 #endif
