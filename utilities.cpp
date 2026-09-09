@@ -14,4 +14,16 @@ namespace utilities {
         }
         return indices;
     }
+
+    int find_substring(const std::string& text, const std::string& pattern) {
+        if (pattern.empty()) {
+            return 0; // Empty pattern matches at index 0
+        }
+
+        size_t pos = text.find(pattern);
+        if (pos != std::string::npos) {
+            return static_cast<int>(pos);
+        }
+        return -1;
+    }
 }
