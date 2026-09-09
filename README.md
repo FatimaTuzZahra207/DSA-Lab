@@ -1,2 +1,2 @@
-# DSA-Lab
+CONFLICT TEST FROM GITHUB
 Line added on GitHub
